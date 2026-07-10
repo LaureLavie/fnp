@@ -1,8 +1,10 @@
 # Guide de mise en place — fabriquenumerique.fr (environnement de travail)
 
-Stack : **Next.js** (front) + **Strapi v5** (CMS headless) + **PostgreSQL** + **Matomo** — **tout hébergé sur le VPS OVH**, sur un sous-domaine `dev.fabriquenumerique.fr` pour ne pas toucher au site en prod.
+Stack : **Next.js** (front) + **Strapi v5** (CMS headless) + **PostgreSQL** + **Matomo** — **tout hébergé sur le VPS OVH**, accès direct par IP (`213.32.21.79`), pas de nom de domaine ni HTTPS pour l'instant. Le vrai site en prod n'est pas touché puisque ce VPS de travail est totalement séparé.
 
 Node 20 LTS · npm · Deux images Docker Hub séparées : `fnp-strapi` et `fnp-nextjs`.
+
+⚠️ Sans nom de domaine, pas de certificat SSL possible (Let's Encrypt en exige un) : tout est en HTTP simple pour le moment. On ajoutera Nginx + Certbot + un (sous-)domaine plus tard si besoin, quand tu voudras passer en HTTPS.
 
 ---
 
@@ -13,15 +15,15 @@ Node 20 LTS · npm · Deux images Docker Hub séparées : `fnp-strapi` et `fnp-n
 | SSH | `ssh ubuntu@vps-02b5d7ab.vps.ovh.net` |
 | IP | `213.32.21.79` |
 | OS | Ubuntu 22.04 |
-| Sous-domaine de travail | `dev.fabriquenumerique.fr` |
-| CMS (staging) | `cms.dev.fabriquenumerique.fr` |
-| Stats (staging) | `stats.dev.fabriquenumerique.fr` |
+| Front Next.js | `http://213.32.21.79:3000` |
+| Strapi admin | `http://213.32.21.79:1337/admin` |
+| Matomo | `http://213.32.21.79:8080` |
 | Docker Hub | `lorlaviedevdesign/fnp-strapi` + `lorlaviedevdesign/fnp-nextjs` |
 
 Ce qu'il te reste à faire de ton côté avant qu'on aille plus loin :
 - [ ] Créer un **Access Token** Docker Hub (Account Settings -> Security) — pas ton mot de passe
 - [ ] Générer une **clé SSH dédiée au déploiement** (voir §6) et l'ajouter aux `authorized_keys` de `ubuntu@` sur le VPS
-- [ ] Créer les 3 enregistrements DNS chez OVH (voir §5)
+- [ ] Rien à faire côté DNS — si tu avais déjà créé des enregistrements `dev` / `cms.dev` / `stats.dev` chez OVH, supprime-les (Manager OVH → domaine `fabriquenumerique.fr` → zone DNS → sélectionner l'enregistrement → Supprimer)
 
 ---
 
@@ -34,7 +36,6 @@ fnp/
 ├── nextjs/
 │   ├── Dockerfile          # build de prod (image standalone)
 │   └── Dockerfile.dev      # hot-reload local
-├── nginx/conf.d/fnp.conf
 ├── docker-compose.yml          # dev local
 ├── docker-compose.prod.yml     # staging sur le VPS
 ├── .env.example
@@ -103,15 +104,7 @@ module.exports = {
 
 ## 5. DNS chez OVH
 
-Manager OVH -> domaine `fabriquenumerique.fr` -> zone DNS -> ajoute 3 enregistrements **A** :
-
-| Sous-domaine | Type | Cible |
-|---|---|---|
-| `dev` | A | `213.32.21.79` |
-| `cms.dev` | A | `213.32.21.79` |
-| `stats.dev` | A | `213.32.21.79` |
-
-(propagation : quelques minutes à quelques heures)
+Aucun enregistrement DNS nécessaire : on travaille directement sur l'IP `213.32.21.79`. Si tu en avais déjà créé (`dev`, `cms.dev`, `stats.dev`), supprime-les : Manager OVH → domaine `fabriquenumerique.fr` → zone DNS → sélectionne la ligne → icône corbeille/"Supprimer".
 
 ---
 
@@ -145,31 +138,29 @@ La clé **privée** (`fnp_deploy_key`) ira dans le secret GitHub `VPS_SSH_KEY` (
 Depuis ta machine, à la racine du repo :
 ```bash
 scp docker-compose.prod.yml .env ubuntu@vps-02b5d7ab.vps.ovh.net:/opt/fnp/
-scp -r nginx ubuntu@vps-02b5d7ab.vps.ovh.net:/opt/fnp/
 ```
 ⚠️ Le `.env` envoyé ici doit contenir les **vraies valeurs de staging** (différentes de ton `.env` local), avec en plus :
 ```
-NEXT_PUBLIC_STRAPI_URL=https://cms.dev.fabriquenumerique.fr
+NEXT_PUBLIC_STRAPI_URL=http://213.32.21.79:1337
 ```
 
-### Certificats SSL (première fois, une fois les DNS propagés)
+### Ouvrir les ports nécessaires (pare-feu du VPS, si actif)
 ```bash
-cd /opt/fnp
-mkdir -p certbot/conf certbot/www
-docker compose -f docker-compose.prod.yml up -d nginx
-docker run --rm -v /opt/fnp/certbot/conf:/etc/letsencrypt \
-  -v /opt/fnp/certbot/www:/var/www/certbot \
-  certbot/certbot certonly --webroot -w /var/www/certbot \
-  -d dev.fabriquenumerique.fr \
-  -d cms.dev.fabriquenumerique.fr \
-  -d stats.dev.fabriquenumerique.fr
-docker compose -f docker-compose.prod.yml restart nginx
+sudo ufw allow 3000/tcp   # Next.js
+sudo ufw allow 1337/tcp   # Strapi admin
+sudo ufw allow 8080/tcp   # Matomo
 ```
 
 ### Lancer tous les services
 ```bash
+cd /opt/fnp
 docker compose -f docker-compose.prod.yml up -d
 ```
+
+Accès direct ensuite :
+- Next.js → `http://213.32.21.79:3000`
+- Strapi admin → `http://213.32.21.79:1337/admin`
+- Matomo → `http://213.32.21.79:8080`
 
 ---
 
@@ -206,4 +197,4 @@ Le workflow `.github/workflows/deploy.yml` :
 2. Configurer les rôles Strapi ("Éditeur blog" / "Administrateur")
 3. Brancher le Next.js sur l'API Strapi via `NEXT_PUBLIC_STRAPI_URL`
 4. Reprendre les maquettes Figma (charte : Indigo #1F1B43, Cyan #4EA3FF, Terracotta #BF5F2D, Montserrat/Kodchasan)
-5. Une fois validé sur `dev.fabriquenumerique.fr`, on planifiera la bascule vers le vrai domaine
+5. Une fois le site validé sur `213.32.21.79`, on décidera d'un nom de domaine (sous-domaine ou domaine final) et on remettra Nginx + Certbot en place pour passer en HTTPS avant la mise en ligne réelle
