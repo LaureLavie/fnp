@@ -1,0 +1,71 @@
+name: Build & Deploy FNP (staging)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "strapi/**"
+      - "nextjs/**"
+      - ".github/workflows/deploy.yml"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    outputs:
+      strapi_changed: ${{ steps.changes.outputs.strapi }}
+      nextjs_changed: ${{ steps.changes.outputs.nextjs }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect changed paths
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            strapi:
+              - 'strapi/**'
+            nextjs:
+              - 'nextjs/**'
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Strapi
+        if: steps.changes.outputs.strapi == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./strapi
+          push: true
+          tags: |
+            lorlaviedevdesign/fnp-strapi:latest
+            lorlaviedevdesign/fnp-strapi:${{ github.sha }}
+
+      - name: Build and push Next.js
+        if: steps.changes.outputs.nextjs == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./nextjs
+          push: true
+          tags: |
+            lorlaviedevdesign/fnp-nextjs:latest
+            lorlaviedevdesign/fnp-nextjs:${{ github.sha }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to OVH VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/fnp
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
+            docker image prune -f
