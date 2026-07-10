@@ -4,8 +4,6 @@ Stack : **Next.js** (front) + **Strapi v5** (CMS headless) + **PostgreSQL** + **
 
 Node 20 LTS · npm · Deux images Docker Hub séparées : `fnp-strapi` et `fnp-nextjs`.
 
-⚠️ Sans nom de domaine, pas de certificat SSL possible (Let's Encrypt en exige un) : tout est en HTTP simple pour le moment. On ajoutera Nginx + Certbot + un (sous-)domaine plus tard si besoin, quand tu voudras passer en HTTPS.
-
 ---
 
 ## 0. Récapitulatif des accès confirmés
