@@ -1,5 +1,5 @@
 # --- Base ---
-  FROM node:20-alpine AS base
+  FROM node:current-alpine AS base
   RUN apk add --no-cache libc6-compat vips-dev python3 make g++
   WORKDIR /opt/app
   
