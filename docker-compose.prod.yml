@@ -1,6 +1,6 @@
 version: "3.9"
 
-# À utiliser SUR LE VPS OVH (vps-02b5d7ab.vps.ovh.net)
+# À utiliser SUR LE VPS OVH (vps-02b5d7ab
 # Accès direct par IP (213.32.21.79), pas de nom de domaine / HTTPS pour l'instant.
 # Héberge : Next.js (front) + Strapi (CMS) + PostgreSQL + Matomo (analytics)
 
