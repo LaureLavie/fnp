@@ -1,7 +1,7 @@
 version: "3.9"
 
 # À utiliser SUR LE VPS OVH (vps-02b5d7ab.vps.ovh.net)
-# Environnement de TRAVAIL (staging), séparé du vrai site en prod.
+# Accès direct par IP (213.32.21.79), pas de nom de domaine / HTTPS pour l'instant.
 # Héberge : Next.js (front) + Strapi (CMS) + PostgreSQL + Matomo (analytics)
 
 services:
@@ -37,14 +37,14 @@ services:
       ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
       JWT_SECRET: ${STRAPI_JWT_SECRET}
       TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
-      URL: https://cms.dev.fabriquenumerique.fr
+      # Pas de nom de domaine : on référence directement l'IP + port
+      URL: http://213.32.21.79:1337
     volumes:
       - strapi_uploads:/opt/app/public/uploads
     networks:
       - fnp_internal
-      - fnp_public
-    expose:
-      - "1337"
+    ports:
+      - "1337:1337"
 
   nextjs:
     image: lorlaviedevdesign/fnp-nextjs:latest
@@ -54,12 +54,11 @@ services:
       - strapi
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_STRAPI_URL: https://cms.dev.fabriquenumerique.fr
+      NEXT_PUBLIC_STRAPI_URL: http://213.32.21.79:1337
     networks:
       - fnp_internal
-      - fnp_public
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
 
   matomo_db:
     image: mariadb:11
@@ -90,40 +89,11 @@ services:
       - matomo_data:/var/www/html
     networks:
       - fnp_internal
-      - fnp_public
-    expose:
-      - "80"
-
-  nginx:
-    image: nginx:alpine
-    container_name: fnp_nginx
-    restart: always
-    depends_on:
-      - strapi
-      - nextjs
-      - matomo
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./certbot/www:/var/www/certbot:ro
     ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - fnp_public
-
-  certbot:
-    image: certbot/certbot
-    container_name: fnp_certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - "8080:80"
 
 networks:
   fnp_internal:
-    internal: true
-  fnp_public:
 
 volumes:
   postgres_data:

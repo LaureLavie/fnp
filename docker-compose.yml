@@ -51,7 +51,7 @@ services:
   nextjs:
     build:
       context: ./nextjs
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: fnp_nextjs
     restart: unless-stopped
     depends_on:
