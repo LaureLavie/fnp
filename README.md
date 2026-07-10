@@ -12,18 +12,13 @@ Node 20 LTS · npm · Deux images Docker Hub séparées : `fnp-strapi` et `fnp-n
 
 | Élément | Valeur |
 |---|---|
-| SSH | `ssh ubuntu@vps-02b5d7ab.vps.ovh.net` |
+| SSH | `ssh ubuntu@vps-02b5d7ab` |
 | IP | `213.32.21.79` |
 | OS | Ubuntu 22.04 |
 | Front Next.js | `http://213.32.21.79:3000` |
 | Strapi admin | `http://213.32.21.79:1337/admin` |
 | Matomo | `http://213.32.21.79:8080` |
 | Docker Hub | `lorlaviedevdesign/fnp-strapi` + `lorlaviedevdesign/fnp-nextjs` |
-
-Ce qu'il te reste à faire de ton côté avant qu'on aille plus loin :
-- [ ] Créer un **Access Token** Docker Hub (Account Settings -> Security) — pas ton mot de passe
-- [ ] Générer une **clé SSH dédiée au déploiement** (voir §6) et l'ajouter aux `authorized_keys` de `ubuntu@` sur le VPS
-- [ ] Rien à faire côté DNS — si tu avais déjà créé des enregistrements `dev` / `cms.dev` / `stats.dev` chez OVH, supprime-les (Manager OVH → domaine `fabriquenumerique.fr` → zone DNS → sélectionner l'enregistrement → Supprimer)
 
 ---
 
@@ -34,10 +29,10 @@ fnp/
 ├── strapi/
 │   └── Dockerfile
 ├── nextjs/
-│   ├── Dockerfile          # build de prod (image standalone)
-│   └── Dockerfile.dev      # hot-reload local
-├── docker-compose.yml          # dev local
-├── docker-compose.prod.yml     # staging sur le VPS
+│   ├── Dockerfile          
+│   └── Dockerfile.dev      
+├── docker-compose.yml          
+├── docker-compose.prod.yml     
 ├── .env.example
 ├── .gitignore
 └── .github/workflows/deploy.yml
@@ -111,7 +106,7 @@ Aucun enregistrement DNS nécessaire : on travaille directement sur l'IP `213.32
 ## 6. Provisionnement du VPS
 
 ```bash
-ssh ubuntu@vps-02b5d7ab.vps.ovh.net
+ssh ubuntu@vps-02b5d7ab
 ```
 
 ### Docker
@@ -130,14 +125,14 @@ sudo mkdir -p /opt/fnp && sudo chown ubuntu:ubuntu /opt/fnp
 ### Clé SSH dédiée au déploiement (depuis ta machine, pas sur le VPS)
 ```bash
 ssh-keygen -t ed25519 -f fnp_deploy_key -N ""
-ssh-copy-id -i fnp_deploy_key.pub ubuntu@vps-02b5d7ab.vps.ovh.net
+ssh-copy-id -i fnp_deploy_key.pub ubuntu@vps-02b5d7ab
 ```
 La clé **privée** (`fnp_deploy_key`) ira dans le secret GitHub `VPS_SSH_KEY` (§8).
 
 ### Copier les fichiers de config sur le VPS
 Depuis ta machine, à la racine du repo :
 ```bash
-scp docker-compose.prod.yml .env ubuntu@vps-02b5d7ab.vps.ovh.net:/opt/fnp/
+scp docker-compose.prod.yml .env ubuntu@vps-02b5d7ab:/opt/fnp/
 ```
 ⚠️ Le `.env` envoyé ici doit contenir les **vraies valeurs de staging** (différentes de ton `.env` local), avec en plus :
 ```
@@ -190,11 +185,3 @@ Le workflow `.github/workflows/deploy.yml` :
 À chaque `git push origin main`, ton staging se met à jour automatiquement.
 
 ---
-
-## 9. Prochaines étapes
-
-1. Modéliser les **content-types Strapi** (Programme DWWM/CDA IA/EISI, Article, Témoignage, Page)
-2. Configurer les rôles Strapi ("Éditeur blog" / "Administrateur")
-3. Brancher le Next.js sur l'API Strapi via `NEXT_PUBLIC_STRAPI_URL`
-4. Reprendre les maquettes Figma (charte : Indigo #1F1B43, Cyan #4EA3FF, Terracotta #BF5F2D, Montserrat/Kodchasan)
-5. Une fois le site validé sur `213.32.21.79`, on décidera d'un nom de domaine (sous-domaine ou domaine final) et on remettra Nginx + Certbot en place pour passer en HTTPS avant la mise en ligne réelle
