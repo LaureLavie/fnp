@@ -1,7 +1,5 @@
 const links = [
   { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Confidentialité", href: "/confidentialite" },
-  { label: "Partenaires", href: "/partenaires" },
   { label: "Contact", href: "#contact" },
 ];
 

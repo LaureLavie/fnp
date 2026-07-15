@@ -46,7 +46,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="section pt-0">
+    <section id="contact" className="section pt-0 scroll-mt-20">
       <div className="container">
         <span className="badge badge-cyan mb-4">Contacte-nous</span>
         <h2>Une question ? Parlons-en !</h2>

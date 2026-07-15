@@ -20,7 +20,7 @@ const engagements = [
 
 export default function Engagements() {
   return (
-    <section className="section pt-0">
+    <section id="engagements" className="section pt-0 scroll-mt-20">
       <div className="container">
         <h2>Nos engagements</h2>
         <p className="max-w-xl">
@@ -39,17 +39,13 @@ export default function Engagements() {
               <p className="mb-0">{item.text}</p>
             </article>
           ))}
-        </div>
-
-        {/* Bandeau équipe — remplacer /images/equipe-fnp.jpg par une photo
-            authentique de l'équipe (principe de marque : photos réelles,
-            jamais de banque d'images). */}
+        </div>        
         <div className="relative mt-8 rounded-lg overflow-hidden aspect-[4/3]">
           <Image
             src="/image/teamFNP.webp"
             alt="L'équipe de formateurs de la Fabrique Numérique Paloise"
             fill
-            className="object-cover"
+            className="object-contain"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-indigo/90 via-indigo/20 to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 text-white">

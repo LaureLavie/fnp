@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import StatsGrid from "@/components/StatsGrid";
 import Engagements from "@/components/Engagements";
@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      <Header />
+      <Navbar />
       <main className="flex-1">
         <Hero />
         <StatsGrid />
