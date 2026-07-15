@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Events from "@/components/Events";
 import Hero from "@/components/Hero";
 import StatsGrid from "@/components/StatsGrid";
 import Engagements from "@/components/Engagements";
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <Navbar />
       <main className="flex-1">
+        <Events />
         <Hero />
         <StatsGrid />
         <Engagements />
