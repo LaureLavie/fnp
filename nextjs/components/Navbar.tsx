@@ -45,7 +45,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <a href="/" className="">
-          <img src="/image/logo-rond.png" alt="Logo FNP" className="h-8 w-auto" />
+          <img src="/image/logo-rond.webp" alt="Logo FNP" className="h-24 w-auto" />
         </a>
 
         {/* Navigation desktop */}

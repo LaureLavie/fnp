@@ -1,20 +1,30 @@
 import Image from "next/image";
 
+type Engagements = {
+  title: string;
+  text: string;
+  variant: "card" | "image";
+  color: "cyan" | "orange" | "indigo" | "terracotta";
+};
+
 const engagements = [
   {
     title: "L'inclusion au cœur",
     text: "Notre centre rassemble des talents, alternants ou apprenants en formation continue dans un écosystème dynamique et collaboratif. Nous agissons concrètement pour réduire la fracture numérique en Nouvelle-Aquitaine.",
-    variant: "card-primary",
+    variant: "card",
+    color: "terracotta",
   },
   {
     title: "Numérique Responsable",
     text: "Nous explorons de nouvelles solutions pour limiter notre empreinte écologique, jusque dans le code que nous produisons.",
-    variant: "card-accent",
+    variant: "card",
+    color: "cyan",
   },
   {
     title: "Innovation Sociale",
     text: "Des méthodes pédagogiques et des outils avec une vision tournée vers l'avenir pour former les talents de demain.",
     variant: "card",
+    color: "indigo",
   },
 ] as const;
 
@@ -30,17 +40,19 @@ export default function Engagements() {
           compétences.
         </p>
 
-        <div className="grid gap-5 mt-8">
+        <div className="grid gap-5 m-2">
           {engagements.map((item) => (
             <article key={item.title} className={item.variant}>
-              <h3 className={item.variant === "card" ? "text-terracotta" : ""}>
+              <h3 className={
+                item.color === "cyan" ? "text-cyan" : item.color === "indigo" ? "text-indigo" : item.color === "terracotta" ? "text-terracotta" : "text-orange"
+              }>
                 {item.title}
               </h3>
               <p className="mb-0">{item.text}</p>
             </article>
           ))}
         </div>        
-        <div className="relative mt-8 rounded-lg overflow-hidden aspect-[4/3]">
+        <div className="relative m-2 rounded-lg overflow-hidden aspect-[4/3]">
           <Image
             src="/image/teamFNP.webp"
             alt="L'équipe de formateurs de la Fabrique Numérique Paloise"

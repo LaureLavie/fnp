@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section className="section pb-12">
       <div className="container">
-        <h1 className="text-4xl md:text-5xl max-w-2xl">
+        <h1 className="text-3xl md:text-4xl max-w-2xl">
           La Fabrique Numérique : Formez-vous à la tech de demain
         </h1>
 

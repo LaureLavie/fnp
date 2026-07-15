@@ -97,7 +97,7 @@ export default function ContactSection() {
             <textarea id="message" name="message" required rows={4} placeholder="Comment pouvons-nous t'aider ?" className="field" />
           </div>
 
-          <button type="submit" disabled={status !== "idle"} className="btn btn-accent justify-self-start disabled:opacity-60">
+          <button type="submit" disabled={status !== "idle"} className="btn btn-accent justify-self-center disabled:opacity-60">
             {status === "idle" && "Envoyer le message"}
             {status === "sending" && "Envoi en cours…"}
             {status === "sent" && "Message envoyé ✓"}

@@ -1,20 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================================
-   FABRIQUE NUMÉRIQUE PALOISE — FEUILLE DE STYLE DE BASE
-   ============================================================
-   Structure du fichier :
-   1. Design tokens bruts (palette, typo, échelles)     -> :root
-   2. Mapping Tailwind v4 (génère les classes utilitaires) -> @theme inline
-   3. Reset & styles de base (body, titres, liens, focus)  -> @layer base
-   4. Composants réutilisables (boutons, badges, cartes)   -> @layer components
-   5. Accessibilité (focus visible, reduced motion)
-
-   Règle d'usage : on ne code jamais une couleur/police en dur
-   dans un composant. On utilise toujours un token ci-dessous
-   (ex: bg-primary, text-ink, font-display) pour que toute
-   évolution de charte se fasse en un seul endroit.
-   ============================================================ */
 
 :root {
   /* --- 1a. Palette de marque brute (charte graphique FNP) --- */
@@ -202,11 +187,11 @@
   }
 
   h1 {
-    font-size: var(--text-4xl);
+    font-size: var(--text-3xl);
     font-weight: 800;
   }
   h2 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
     font-weight: 700;
   }
   h3 {
@@ -305,6 +290,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    justify-items: center;
     gap: 0.5rem;
     font-family: var(--font-display);
     font-weight: 600;

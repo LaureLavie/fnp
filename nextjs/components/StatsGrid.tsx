@@ -1,13 +1,13 @@
 type Stat = {
   value: string;
   label: string;
-  color: "cyan" | "orange";
+  color: "cyan" | "orange" | "indigo" | "terracotta";
 };
 
 const stats: Stat[] = [
   { value: "600+", label: "Apprenants depuis 2018", color: "cyan" },
-  { value: "100%", label: "Taux de réussite", color: "cyan" },
-  { value: "95%", label: "Sorties positives", color: "cyan" },
+  { value: "100%", label: "Taux de réussite", color: "indigo" },
+  { value: "95%", label: "Sorties positives", color: "terracotta" },
   { value: "0€", label: "Reste à charge", color: "orange" },
 ];
 
@@ -22,7 +22,7 @@ export default function StatsGrid() {
           >
             <p
               className={`font-display font-extrabold text-3xl md:text-4xl mb-1 ${
-                stat.color === "cyan" ? "text-cyan" : "text-orange"
+                stat.color === "cyan" ? "text-cyan" : stat.color === "indigo" ? "text-indigo" : stat.color === "terracotta" ? "text-terracotta" : "text-orange"
               }`}
             >
               {stat.value}
