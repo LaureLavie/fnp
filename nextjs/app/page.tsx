@@ -1,12 +1,23 @@
-
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import StatsGrid from "@/components/StatsGrid";
+import Engagements from "@/components/Engagements";
+import TestCta from "@/components/TestCta";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
-      <p className="mt-4 text-lg">
-        Get started by editing <code>app/page.tsx</code>
-      </p>
-    </div>
+    <>
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <StatsGrid />
+        <Engagements />
+        <TestCta />
+        <ContactSection />
+      </main>
+      <Footer />
+    </>
   );
 }
