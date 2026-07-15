@@ -32,7 +32,7 @@ export default function Engagements() {
   return (
     <section id="engagements" className="section pt-0 scroll-mt-20">
       <div className="container">
-        <h2>Nos engagements</h2>
+        <h2>Nos <span className="text-cyan">Engagements</span></h2>
         <p className="max-w-xl">
           Fabrique Inclusive accélère l&apos;accès aux métiers du numérique
           avec la Fabrique Numérique Paloise. Peu importe le parcours, nous

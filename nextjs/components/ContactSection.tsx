@@ -49,7 +49,7 @@ export default function ContactSection() {
     <section id="contact" className="section pt-0 scroll-mt-20">
       <div className="container">
         <span className="badge badge-cyan mb-4">Contacte-nous</span>
-        <h2>Une question ? Parlons-en !</h2>
+        <h2>Une question ? <span className="text-cyan">Parlons-en !</span></h2>
 
         <ul className="flex flex-col gap-4 mt-6 mb-10 list-none p-0">
           {infos.map((info) => (

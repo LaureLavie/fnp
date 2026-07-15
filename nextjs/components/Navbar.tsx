@@ -54,7 +54,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className={`link-underline text-sm font-medium ${
+              className={`link-underline text-lg font-medium ${
                 isActive(link.href) ? "text-primary" : "text-ink-900"
               }`}
             >

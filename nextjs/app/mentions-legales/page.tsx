@@ -16,11 +16,11 @@ export default function MentionsLegales() {
         <section className="section">
           <div className="container max-w-3xl">
             <span className="badge badge-cyan mb-4">Informations légales</span>
-            <h1 className="text-3xl md:text-4xl">Mentions légales</h1>
+            <h1 className="text-3xl md:text-4xl">Mentions <span className="text-cyan">Légales</span></h1>
 
             <div className="flex flex-col gap-10 mt-8">
               <article>
-                <h2>I. Présentation du site</h2>
+                <h2>I. Présentation du <span className="text-cyan">Site</span></h2>
                 <p>
                   En vertu de l&rsquo;article 6 de la loi n° 2004-575 du 21
                   juin 2004 pour la confiance dans l&rsquo;économie numérique,
@@ -59,7 +59,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>II. Conditions générales d&rsquo;utilisation du site et des services proposés</h2>
+                <h2>II. Conditions générales d&rsquo;utilisation <span className="text-cyan">du site et des services proposés</span></h2>
                 <p>
                   L&rsquo;utilisation du site fabriquenumerique.fr implique
                   l&rsquo;acceptation pleine et entière des conditions
@@ -88,7 +88,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>III. Description des services fournis</h2>
+                <h2>III. Description <span className="text-cyan">des services fournis</span></h2>
                 <p>
                   Le site fabriquenumerique.fr a pour objet de fournir une
                   information concernant l&rsquo;ensemble des activités du
@@ -115,7 +115,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>IV. Limitations contractuelles sur les données techniques</h2>
+                <h2>IV. Limitations contractuelles <span className="text-cyan">sur les données techniques</span></h2>
                 <p className="mb-0">
                   Le site Internet ne pourra être tenu responsable de
                   dommages matériels liés à l&rsquo;utilisation du site. De
@@ -127,7 +127,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>V. Propriété intellectuelle et contrefaçons</h2>
+                <h2>V. Propriété intellectuelle <span className="text-cyan">et contrefaçons</span></h2>
                 <p>
                   Fabrique Numérique Paloise est propriétaire des droits de propriété
                   intellectuelle ou détient les droits d&rsquo;usage sur tous
@@ -150,7 +150,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>VI. Limitations de responsabilité</h2>
+                <h2>VI. Limitations <span className="text-cyan">de responsabilité</span></h2>
                 <p>
                   Fabrique Numérique Paloise ne pourra être tenue responsable des dommages
                   directs et indirects causés au matériel de
@@ -184,7 +184,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>VII. Gestion des données personnelles</h2>
+                <h2>VII. Gestion <span className="text-cyan">des données personnelles</span></h2>
                 <p>
                   En France, les données personnelles sont notamment
                   protégées par la loi n° 78-87 du 6 janvier 1978, la loi n°
@@ -245,8 +245,8 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>VIII. Liens hypertextes et cookies</h2>
-               
+                <h2>VIII. Liens hypertextes <span className="text-cyan">et cookies</span></h2>
+
                 <p>
                   La navigation sur le site fabriquenumerique.fr est
                   susceptible de provoquer l&rsquo;installation de cookie(s)
@@ -306,7 +306,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>IX. Droit applicable et attribution de juridiction</h2>
+                <h2>IX. Droit applicable <span className="text-cyan">et attribution de juridiction</span></h2>
                 <p className="mb-0">
                   Tout litige en relation avec l&rsquo;utilisation du site{" "}
                   <a href="https://www.fabriquenumerique.fr" target="_blank" rel="noopener noreferrer">
@@ -319,7 +319,7 @@ export default function MentionsLegales() {
               </article>
 
               <article>
-                <h2>X. Les principales lois concernées</h2>
+                <h2>X. Les principales <span className="text-cyan">Lois concernées</span></h2>
                 <ul className="list-disc pl-5 flex flex-col gap-1 text-ink-700 mb-0">
                   <li>
                     Loi n° 78-87 du 6 janvier 1978, notamment modifiée par la
