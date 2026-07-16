@@ -95,6 +95,7 @@ services:
 
 networks:
   fnp_internal:
+  fnp_public:
 
 volumes:
   postgres_data:

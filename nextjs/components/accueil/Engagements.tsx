@@ -57,7 +57,7 @@ export default function Engagements() {
             src="/image/teamFNP.webp"
             alt="L'équipe de formateurs de la Fabrique Numérique Paloise"
             fill
-            className="object-contain"
+            className="object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-indigo/90 via-indigo/20 to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 text-white">
