@@ -54,7 +54,7 @@ export default function Engagements() {
         </div>        
         <div className="relative m-2 rounded-lg overflow-hidden aspect-[4/3]">
           <Image
-            src="/image/teamFNP.webp"
+            src="/image/team_fnp_metal.webp"
             alt="L'équipe de formateurs de la Fabrique Numérique Paloise"
             fill
             className="object-cover object-top"
