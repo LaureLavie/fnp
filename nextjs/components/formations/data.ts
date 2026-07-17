@@ -15,10 +15,7 @@ export type Formation = {
   imageAlt: string;
 };
 
-// Contenu de référence : les 3 formations certifiées de la FNP
-// (DWWM, CDA spécialisé IA en partenariat avec 3WA, EISI).
-// À terme, ce catalogue sera géré depuis Strapi (content-type "Formation")
-// plutôt que codé en dur ici.
+
 export const formations: Formation[] = [
   {
     slug: "developpeur-web-full-stack",
