@@ -1,15 +1,15 @@
-import { env } from '@strapi/utils';
+export default ({ env }: any) => {
+  const client = env('DATABASE_CLIENT', 'postgres');
 
-export default ({ env }: any) => ({
-  connection: {
-    client: env('DATABASE_CLIENT', 'postgres'),
+  return {
     connection: {
-      host: env('DATABASE_HOST'),
-      port: env.int('DATABASE_PORT'),
-      database: env('DATABASE_NAME'),
-      user: env('DATABASE_USERNAME'),
-      password: env('DATABASE_PASSWORD'),
-      ssl: env.bool('DATABASE_SSL', false),
+      client,
+      connection: {
+        connectionString: env('DATABASE_URL'), // Strapi préfère souvent utiliser l'URL complète
+        ssl: env.bool('DATABASE_SSL', false),
+      },
+      useNullAsDefault: true,
+      pool: { min: 0, max: 10 },
     },
-  },
-});
+  };
+};
