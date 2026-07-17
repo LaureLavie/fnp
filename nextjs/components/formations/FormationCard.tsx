@@ -15,7 +15,7 @@ const statusClass = {
 export default function FormationCard({ formation }: { formation: Formation }) {
   return (
     <article className="card p-0 overflow-hidden">
-      <div className="relative aspect-[16/10]">
+      <div className="relative aspect-ratio[16/10]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={formation.image}
