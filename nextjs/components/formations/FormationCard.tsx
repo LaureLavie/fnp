@@ -12,6 +12,7 @@ const statusClass = {
   orange: "text-orange",
 } as const;
 
+
 export default function FormationCard({ formation }: { formation: Formation }) {
   return (
     <article className="card p-0 overflow-hidden">
@@ -53,10 +54,7 @@ export default function FormationCard({ formation }: { formation: Formation }) {
             className="inline-flex items-center gap-1 text-sm font-display font-semibold text-ink-900 hover:text-primary"
           >
             En savoir plus
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+            
           </Link>
         </div>
       </div>

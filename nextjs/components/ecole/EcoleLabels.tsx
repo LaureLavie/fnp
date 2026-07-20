@@ -1,45 +1,46 @@
 const credentials = [
   {
-    label: "Processus Certifié",
-    caption: "Qualiopi",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
+    label: "Qualiopi",
+    description: "Certification qualité garantissant l'excellence de nos processus de formation et d'apprentissage.",
+    icon: <img src="/image/logo-qualiopi.webp" alt="Logo Qualiopi" />,
   },
   {
     label: "Label GEN",
-    caption: "Grande École du Numérique",
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1L12 2Z" />
-      </svg>
-    ),
+    description: "Reconnaissance d'excellence pour nos formations aux métiers du numérique ouvertes à tous.",
+    icon: <img src="/image/logo-gen.webp" alt="Logo Label GEN" />,
+  },
+  {
+    label: "Engagement Handicap (CRFH)",
+    description: "Un accompagnement dédié pour garantir l'accessibilité et la réussite de tous les parcours.",
+    icon: <img src="/image/logo-crfh.webp" alt="Logo Engagement Handicap (CRFH)" />,
+  },
+  {
+    label: "Apprentissage Nouvelle-Aquitaine",
+    description: "Engagement régional pour des pratiques innovantes et qualitatives au service des bénéficiaires.",
+    icon: <img src="/image/logo-ana.webp" alt="Logo Apprentissage Nouvelle-Aquitaine" />,
   },
 ];
 
 export default function EcoleLabels() {
   return (
-    <section id="engagements" className="bg-indigo scroll-mt-16 py-12">
+    <section id="engagements" className="bg-indigo scroll-mt-16 py-16">
       <div className="container">
-        <h2 className="text-white mb-6">Nos Labels &amp; Certifications</h2>
+        <h2 className="text-white text-center mb-12">Nos Engagements Qualité</h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {credentials.map((credential) => (
             <div
               key={credential.label}
-              className="bg-surface rounded-lg p-5 text-center"
+              className="bg-surface rounded-lg p-6 flex flex-col items-center text-center shadow-sm"
             >
-              {/* Emplacement du logo officiel — à remplacer par le vrai
-                  visuel de certification (Qualiopi / GEN) une fois
-                  disponible dans les assets de marque. */}
-              <span className="flex items-center justify-center h-16 text-indigo mb-3">
+              <span className="flex items-center object-contain w-20 h-20 mb-4">
                 {credential.icon}
               </span>
-              <p className="font-display font-semibold text-ink-900 mb-0">
+              <h3 className="font-display font-semibold text-ink-900 text-lg mb-2">
                 {credential.label}
+              </h3>
+              <p className="text-sm text-ink-700 leading-relaxed">
+                {credential.description}
               </p>
             </div>
           ))}
