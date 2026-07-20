@@ -1,36 +1,20 @@
 type TeamMember = {
   name: string;
   role: string;
-  accent: "cyan" | "terracotta" | "indigo" | "orange";
+  borderColor: "cyan" | "terracotta" | "indigo" | "orange";
+  image: string; 
 };
 
-// TODO : ajouter la nouvelle Chargée de Relations Entreprises et Insertion
-// dès que son nom et sa photo seront confirmés.
 const team: TeamMember[] = [
-  { name: "Jean Michel CHAUVEAU", role: "Directeur", accent: "indigo" },
-  { name: "Sandrine ROGER", role: "Référente Handicap", accent: "terracotta" },
-  { name: "Clémentine COMPAIN", role: "Coordinatrice Pédagogique", accent: "cyan" },
-  { name: "Bertrand FILLION", role: "Formateur Référent", accent: "orange" },
-  { name: "Oussama JOMAA", role: "Formateur référent", accent: "cyan" },
-  { name: "Charlotte PREVOST", role: "Chargée de relations", accent: "indigo" },
-  { name: "Laure LASPALLES", role: "Chargée de Communication", accent: "terracotta" },
+  { name: "Jean Michel CHAUVEAU", role: "Directeur", borderColor: "indigo", image: "/image/jeanmichel.webp" },
+  { name: "Sandrine ROGER", role: "Référente Handicap", borderColor: "terracotta", image: "/image/sandrine.webp" },
+  { name: "Clémentine COMPAIN", role: "Coordinatrice Pédagogique", borderColor: "cyan", image: "/image/clementine.webp" },
+  { name: "Bertrand FILLION", role: "Formateur Référent", borderColor: "orange", image: "/image/bertrand.webp" },
+  { name: "Oussama JOMAA", role: "Formateur référent", borderColor: "cyan", image: "/image/oussama.webp" },
+  { name: "Charlotte PREVOST", role: "Chargée de relations", borderColor: "indigo", image: "/image/charlotte.webp" },
+  { name: "Laure LASPALLES", role: "Chargée de Communication", borderColor: "terracotta", image: "/image/laure.webp" },
 ];
 
-const accentClass = {
-  cyan: "bg-cyan-soft text-indigo",
-  terracotta: "bg-terracotta-soft text-terracotta",
-  indigo: "bg-indigo text-white",
-  orange: "bg-orange-soft text-orange",
-} as const;
-
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
 
 export default function EcoleEquipe() {
   return (
@@ -46,11 +30,15 @@ export default function EcoleEquipe() {
         <div className="flex flex-col gap-4 max-w-xl mx-auto">
           {team.map((member) => (
             <div key={member.name} className="card flex items-center gap-4">
-              <span
-                className={`flex items-center justify-center w-14 h-14 rounded-full font-display font-bold shrink-0 ${accentClass[member.accent]}`}
-              >
-                {getInitials(member.name)}
-              </span>
+              {/* Remplacement de l'initiale par l'image */}
+              <div className={`w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 ${member.borderColor}`}>
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
               <span>
                 <span className="block font-display font-semibold text-indigo">
                   {member.name}
