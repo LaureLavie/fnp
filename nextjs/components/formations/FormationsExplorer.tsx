@@ -25,7 +25,7 @@ export default function FormationsExplorer() {
   }, [activeFilter, query]);
 
   return (
-    <section className="section pt-0 pb-10">
+    <section className="section mt-5 pt-0 pb-10">
       <div className="container">
         {/* Filtres par niveau */}
         <p className="font-display font-semibold text-terracotta text-sm mb-3">

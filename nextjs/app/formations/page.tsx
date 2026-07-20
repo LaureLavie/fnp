@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import FormationsHero from "@/components/formations/FormationsHero";
 import FormationsExplorer from "@/components/formations/FormationsExplorer";
 import FormationsCta from "@/components/formations/FormationsCta";
+import RejoindreHero from "@/components/formations/RejoindreHero";
+import RejoindreSection from "@/components/formations/RejoindreSection";
 
 export const metadata: Metadata = {
   title: "Nos formations — Fabrique Numérique Paloise",
@@ -19,6 +21,8 @@ export default function Formations() {
         <FormationsHero />
         <FormationsExplorer />
         <FormationsCta />
+        <RejoindreHero />
+        <RejoindreSection />
       </main>
       <Footer />
     </>

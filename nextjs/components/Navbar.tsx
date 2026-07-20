@@ -29,7 +29,8 @@ export default function Navbar() {
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
           className="flex md:hidden items-center justify-center w-10 h-10 rounded-full text-ink-900 hover:bg-ink-100 transition-colors"
-        >
+          >
+          
           {open ? (
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -65,10 +66,10 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="/candidater" className="btn btn-accent py-2 px-5 text-sm">
+          <a href="/contact/contacter" className="btn btn-accent py-2 px-5 text-sm">
             Candidater
-          </a>      
-          </div>
+          </a>
+        </div>
       </div>
 
       {/* Panneau menu mobile */}
@@ -94,7 +95,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="/candidater"
+            href="/contact/contacter"
             onClick={() => setOpen(false)}
             className="btn btn-accent mt-3 justify-center"
           >
