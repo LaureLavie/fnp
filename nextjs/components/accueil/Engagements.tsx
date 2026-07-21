@@ -52,7 +52,7 @@ export default function Engagements() {
             </article>
           ))}
         </div>        
-        <div className="relative m-2 rounded-lg overflow-hidden aspect-[4/3]">
+        <div className="relative m-2 rounded-lg overflow-hidden aspect-[4/3] mt-5">
           <Image
             src="/image/team_fnp_metal.webp"
             alt="L'équipe de formateurs de la Fabrique Numérique Paloise"
