@@ -26,6 +26,8 @@
   COPY --from=build /opt/app/dist ./dist
   COPY --from=build /opt/app/public ./public
   COPY --from=build /opt/app/node_modules ./node_modules
+
+  RUN mkdir -p public/uploads && chown -R node:node public/uploads
   
   RUN chown -R node:node /opt/app
   USER node
