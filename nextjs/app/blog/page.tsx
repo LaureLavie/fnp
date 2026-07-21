@@ -29,8 +29,8 @@ export default async function Blog() {
       <Navbar />
       <main className="flex-1">
         <BlogHero />
-        <BlogExplorer articles={articles} />
         <EvenementsAgenda evenements={evenements} />
+        <BlogExplorer articles={articles} />
         <TemoignagesSection temoignages={temoignages} />
       </main>
       <Footer />
