@@ -1,5 +1,20 @@
 import Link from "next/link";
-import {Formation} from "../formations/data";
+
+
+export interface Formation {
+  id: number | string;
+  slug: string;
+  title: string;
+  description: string;
+  badge: string;
+  badgeColor: "cyan" | "terracotta" | "orange";
+  level: string;
+  status: string;
+  statusColor: "cyan" | "orange";
+  image: string;
+  imageAlt: string;
+  link: string; 
+}
 
 const badgeClass = {
   cyan: "badge-cyan",
