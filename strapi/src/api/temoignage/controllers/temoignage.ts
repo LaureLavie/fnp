@@ -1,3 +1,3 @@
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreController('api::temoignage.temoignage');
+export default factories.createCoreController('api::temoignage.temoignage' as any);

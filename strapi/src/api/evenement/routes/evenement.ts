@@ -1,3 +1,3 @@
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter('api::evenement.evenement');
+export default factories.createCoreRouter('api::evenement.evenement' as any);
