@@ -27,11 +27,9 @@ fnp/
 ├── strapi/
 │   └── Dockerfile
 ├── nextjs/
-│   ├── Dockerfile          
-│   └── Dockerfile.dev      
-├── docker-compose.yml          
-├── docker-compose.prod.yml     
-├── .env.example
+│   ├── Dockerfile      
+├── docker-compose.yml         
+├── .env
 ├── .gitignore
 └── .github/workflows/deploy.yml
 ```
@@ -86,7 +84,7 @@ module.exports = {
 
 ## 4. Dev local (Docker)
 
-1. `.env.example` -> `.env` à la racine, génère les secrets Strapi :
+1. `.env` -> `.env` à la racine, génère les secrets Strapi :
    ```bash
    openssl rand -base64 32   # x4 pour STRAPI_APP_KEYS, puis 1x par autre secret
    ```
@@ -97,14 +95,14 @@ module.exports = {
 
 ## 5. DNS chez OVH
 
-Aucun enregistrement DNS nécessaire : on travaille directement sur l'IP `213.32.21.79`. Si tu en avais déjà créé (`dev`, `cms.dev`, `stats.dev`), supprime-les : Manager OVH → domaine `fabriquenumerique.fr` → zone DNS → sélectionne la ligne → icône corbeille/"Supprimer".
+Aucun enregistrement DNS nécessaire : on travaille directement sur l'IP `213.32.21.79`. 
 
 ---
 
 ## 6. Provisionnement du VPS
 
 ```bash
-ssh ubuntu@vps-02b5d7ab
+ssh ubuntu@213.32.21.79
 ```
 
 ### Docker
@@ -117,20 +115,20 @@ sudo apt update && sudo apt install -y docker-compose-plugin
 
 ### Dossier de déploiement
 ```bash
-sudo mkdir -p /opt/fnp && sudo chown ubuntu:ubuntu /opt/fnp
+sudo mkdir -p /fnp && sudo chown ubuntu:ubuntu /fnp
 ```
 
 ### Clé SSH dédiée au déploiement (depuis ta machine, pas sur le VPS)
 ```bash
 ssh-keygen -t ed25519 -f fnp_deploy_key -N ""
-ssh-copy-id -i fnp_deploy_key.pub ubuntu@vps-02b5d7ab
+ssh-copy-id -i fnp_deploy_key.pub ubuntu@213.32.21.79
 ```
 La clé **privée** (`fnp_deploy_key`) ira dans le secret GitHub `VPS_SSH_KEY` (§8).
 
 ### Copier les fichiers de config sur le VPS
 Depuis ta machine, à la racine du repo :
 ```bash
-scp docker-compose.prod.yml .env ubuntu@vps-02b5d7ab:/opt/fnp/
+scp docker-compose.prod.yml .env ubuntu@213.32.21.79:/fnp/
 ```
 ⚠️ Le `.env` envoyé ici doit contenir les **vraies valeurs de staging** (différentes de ton `.env` local), avec en plus :
 ```
@@ -146,7 +144,7 @@ sudo ufw allow 8080/tcp   # Matomo
 
 ### Lancer tous les services
 ```bash
-cd /opt/fnp
+cd /fnp
 docker compose -f docker-compose.prod.yml up -d
 ```
 
