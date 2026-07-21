@@ -20,7 +20,7 @@
   ENV NODE_ENV=production
   
   COPY --from=build /opt/app/package.json /opt/app/package-lock.json ./
-  COPY --from=build /opt/app/config ./config
+  #COPY --from=build /opt/app/config ./config
   COPY --from=build /opt/app/src ./src
   COPY --from=build /opt/app/tsconfig.json ./tsconfig.json
   COPY --from=build /opt/app/dist ./dist
