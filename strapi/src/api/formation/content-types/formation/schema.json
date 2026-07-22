@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "formations",
+  "info": {
+    "singularName": "formation",
+    "pluralName": "formations",
+    "displayName": "Formation",
+    "description": "Formations certifiées, synchronisées automatiquement depuis Digiforma"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "digiformaId": {
+      "type": "string",
+      "unique": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "startDateLabel": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string",
+      "required": true
+    },
+    "badgeColor": {
+      "type": "enumeration",
+      "enum": ["cyan", "terracotta", "orange"],
+      "default": "cyan"
+    },
+    "level": {
+      "type": "string",
+      "required": true
+    },
+    "levelTags": {
+      "type": "json"
+    },
+    "status": {
+      "type": "string",
+      "default": "À venir"
+    },
+    "statusColor": {
+      "type": "enumeration",
+      "enum": ["cyan", "orange"],
+      "default": "cyan"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "imageAlt": {
+      "type": "string"
+    },
+    "lastSyncedAt": {
+      "type": "datetime"
+    }
+  }
+}
