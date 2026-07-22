@@ -176,7 +176,7 @@ Dans GitHub, **Settings -> Secrets and variables -> Actions** :
 Le workflow `.github/workflows/deploy.yml` :
 1. détecte si `strapi/` et/ou `nextjs/` ont changé
 2. build + push uniquement l'image concernée sur Docker Hub (`fnp-strapi` et/ou `fnp-nextjs`)
-3. se connecte en SSH au VPS et relance `docker compose -f docker-compose.prod.yml pull && up -d`
+3. se connecte en SSH au VPS et relance `docker compose -f docker-compose.yml pull && up -d`
 
 À chaque `git push origin main`, ton staging se met à jour automatiquement.
 
