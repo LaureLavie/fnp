@@ -67,6 +67,6 @@ jobs:
           script_stop: true
           script: |
             cd /home/ubuntu/fnp
-            docker compose pull
-            docker compose up -d --force-recreate
+            docker compose pull strapi nextjs
+            docker compose up -d --force-recreate --no-deps strapi nextjs
             docker image prune -f
