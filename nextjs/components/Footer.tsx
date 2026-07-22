@@ -1,6 +1,6 @@
 const links = [
   { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "/contact/footer" },
 ];
 
 export default function Footer() {

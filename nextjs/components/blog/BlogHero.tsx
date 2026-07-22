@@ -6,10 +6,7 @@ export default function BlogHero() {
           <h1 className="text-white mb-2">
             Blog &amp; <span className="block text-cyan">ACTUALITÉS</span>
           </h1>
-          <p className="text-white/80 max-w-xl mb-0">
-            Guides pratiques, ressources pédagogiques, actualités de la
-            Fabrique et paroles de celles et ceux qui sont passés par ici.
-          </p>
+         
         </div>
       </div>
     </section>
