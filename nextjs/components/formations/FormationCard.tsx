@@ -2,7 +2,7 @@ import Link from "next/link";
 
 
 export interface Formation {
-  id: number | string;
+  id?: number | string;
   slug: string;
   title: string;
   description: string;
