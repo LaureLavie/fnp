@@ -8,7 +8,7 @@ export type Formation = {
   levelTags: FormationLevelTag[];
   title: string;
   description: string;
-  status: "À venir" | "Programmé";
+  status: "Démarrée" | "Programmée" | "À venir";
   link: string;
   statusColor: "cyan" | "orange";
   image: string;
@@ -58,7 +58,7 @@ export const formations: Formation[] = [
     title: "Expert Informatique & Systèmes d'Info",
     description:
       "Deviens un leader technique capable de piloter la transformation numérique et la sécurité des systèmes d'envergure.",
-    status: "Programmé",
+    status: "Programmée",
     statusColor: "orange",
     link: "https://fabriquenumerique.catalogueformpro.com/7/formation-alternance/1627520/2025-expert-en-informatique-et-systeme-dinformation",
     image:
