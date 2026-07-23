@@ -50,6 +50,8 @@ jobs:
         with:
           context: ./nextjs
           push: true
+          build-args: |
+            NEXT_PUBLIC_STRAPI_URL=http://213.32.21.79:1337
           tags: |
             lorlaviedevdesign/fnp-nextjs:latest
             lorlaviedevdesign/fnp-nextjs:${{ github.sha }}
