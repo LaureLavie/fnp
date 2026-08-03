@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import ContactForm from "@/components/contact/ContactForm";
+import ContactForm from "@/components/contact/CandidatForm";
 
 export const metadata: Metadata = {
   title: "Contact — Fabrique Numérique Paloise",
