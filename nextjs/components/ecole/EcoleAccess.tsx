@@ -75,7 +75,7 @@ export default function EcoleAccess() {
           ))}
         </ul>
 
-        <div className="rounded-lg overflow-hidden shadow-sm aspect-[4/3] md:aspect-[16/7]">
+        <div className="rounded-lg overflow-hidden shadow-sm aspect-ratio[4/3] md:aspect-ratio[16/7]">
           <iframe
             title="Localisation de la Fabrique Numérique Paloise à Pau"
             src={MAP_EMBED_SRC}

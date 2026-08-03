@@ -17,6 +17,7 @@ export type FormationLevelTag =
 
 export interface Formation {
   slug: string;
+  id: number | string;
   title: string;
   description: string;
   startDateLabel: string;
@@ -160,48 +161,33 @@ export async function getFormations(): Promise<Formation[]> {
         return {
 
           slug: mapping.siteSlug,
-
+          id: session.id,
           title: program.name,
-
           description:
             program.description ??
             "Description en cours de mise à jour.",
-
-
           startDateLabel:
             formatStartDateLabel(
               session.startDate
             ),
-
-
           link:
             program.publicRegistrationUrl ??
             "#",
-
-
           badge: mapping.badge,
-
           badgeColor: mapping.badgeColor,
-
           level: mapping.level,
-
           levelTags: [
             ...mapping.levelTags
           ],
-
           status:
             program.onSale
               ? "Inscriptions ouvertes"
               : "Complet",
-
-
           statusColor:
             program.onSale
               ? "cyan"
               : "orange"
-
         };
-
 
       } catch (error) {
 

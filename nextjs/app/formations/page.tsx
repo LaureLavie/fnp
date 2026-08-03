@@ -30,8 +30,8 @@ export default async function Formations() {
 
 
   const formations: Formation[] =
-  digiformaFormations.map((f, index) => ({
-    id: index + 1,
+  digiformaFormations.map((f) => ({
+    id: f.id,
     slug: f.slug,
     title: f.title,
     description: f.description,
