@@ -14,16 +14,25 @@ export default function FormationsExplorer({
 
   const filtered = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-
+  
     return formations.filter((formation) => {
+  
       const matchesQuery =
         normalizedQuery === "" ||
         formation.title.toLowerCase().includes(normalizedQuery) ||
         formation.badge.toLowerCase().includes(normalizedQuery);
-
-      return matchesQuery;
+  
+  
+      const matchesLevel =
+        activeFilter === "all" ||
+        formation.levelTags.includes(activeFilter);
+  
+  
+      return matchesQuery && matchesLevel;
+  
     });
-  }, [formations, query]);
+  
+  }, [formations, query, activeFilter]);
 
   return (
     <section className="section mt-5 pt-0 pb-10">

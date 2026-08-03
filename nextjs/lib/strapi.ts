@@ -43,28 +43,6 @@ export type StrapiBlock = {
   children: { text?: string; type?: string; bold?: boolean; italic?: boolean }[];
 };
 
-export type FormationLevelTag = "bac2" | "bac3" | "bac4" | "bac5";
-
-export interface StrapiFormation {
-  id: number;
-  documentId: string;
-  digiformaId?: string;
-  slug: string;
-  title: string;
-  description: string;
-  startDateLabel?: string;
-  link?: string;
-  badge: string;
-  badgeColor: "cyan" | "terracotta" | "orange";
-  level: string;
-  levelTags?: FormationLevelTag[];
-  status: string;
-  statusColor: "cyan" | "orange";
-  image?: StrapiMedia;
-  imageAlt?: string;
-  lastSyncedAt?: string;
-}
-
 export interface StrapiArticle {
   id: number;
   documentId: string;
@@ -129,15 +107,6 @@ async function fetchStrapi<T>(
     console.error(`Erreur de connexion à Strapi (${path}) :`, error);
     return null;
   }
-}
-
-/** Toutes les formations publiées, synchronisées depuis Digiforma. */
-export async function getFormations(): Promise<StrapiFormation[]> {
-  const data = await fetchStrapi<{ data: StrapiFormation[] }>(
-    "formations",
-    "?populate=image&pagination[pageSize]=50"
-  );
-  return data?.data ?? [];
 }
 
 /** Tous les articles publiés, triés du plus récent au plus ancien. */

@@ -1,3 +1,0 @@
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::formation.formation' as any);

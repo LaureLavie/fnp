@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 
 export interface Formation {
@@ -9,6 +10,7 @@ export interface Formation {
   badge: string;
   badgeColor: "cyan" | "terracotta" | "orange";
   level: string;
+  levelTags: ("bac2" | "bac3" | "bac4" | "bac5")[];
   status: string;
   statusColor: "cyan" | "orange";
   image: string;
@@ -62,10 +64,10 @@ export default function FormationCard({ formation }: { formation: Formation }) {
           >
             {formation.status}
           </span>
-          <Link 
-            href={formation.link} 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link
+  href={formation.link || "#"}
+  target="_blank"
+  rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm font-display font-semibold text-ink-900 hover:text-primary"
           >
             En savoir plus
