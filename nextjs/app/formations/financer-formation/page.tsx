@@ -51,11 +51,7 @@ export default function FinancerFormation() {
                   Chaque parcours est unique. Si vous rencontrez des difficultés dans vos démarches ou si vous souhaitez obtenir des précisions sur les financements liés à l'alternance (contrat d'apprentissage ou de professionnalisation), n'hésitez pas à contacter nos équipes de la Fabrique Numérique Paloise. Nous sommes là pour vous orienter.
                 </p>
               </article>
-            </div>
-            <span 
-            className="badge badge-cyan mb-4">
-            <Link href="/formations" className="ml-2 text-cyan hover:underline">Retour Nos Formations</Link>
-            </span>
+            </div>            
           </div>
         </section>
       </main>

@@ -97,8 +97,8 @@ export default function DroitsSanteTravail() {
 
             </div>
             <span 
-            className="badge badge-cyan mb-4">
-            <Link href="/ecole" className="ml-2 text-cyan hover:underline">Retour Notre École</Link>
+            className="badge badge-orange mt-7">
+            <Link href="/ecole" className="ml-2 text-orange-600 hover:underline">Retour "Notre École"</Link>
             </span>
           </div>
         </section>

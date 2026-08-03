@@ -109,8 +109,8 @@ export default function Candidater() {
               </article>
             </div> 
             <span 
-            className="badge badge-cyan mb-4">
-            <Link href="/formations" className="ml-2 text-cyan hover:underline">Retour Nos Formations</Link>
+            className="badge badge-cyan mt-7">
+            <Link href="/formations" className="ml-2 text-cyan hover:underline">Retour "Nos Formations"</Link>
             </span>
           </div>
         </section>
