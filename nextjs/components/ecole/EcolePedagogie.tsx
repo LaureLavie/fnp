@@ -15,9 +15,9 @@ export default function EcolePedagogie() {
             favorisant l'intelligence collective et la montée en compétences par la pratique.
           </p>
           <div className="flex gap-4 text-sm font-medium opacity-90 text-terracotta">
-            <span> - Projets collaboratifs</span>
-            <span> - Apprentissage par l'expérience</span>
-            <span> - Co-construction</span>
+            <span> Projets collaboratifs</span>
+            <span> Apprentissage par l'expérience</span>
+            <span> Co-construction</span>
           </div>
           <div className="mt-6">
             <Link

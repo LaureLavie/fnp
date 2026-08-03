@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Approche pédagogique — Fabrique Numérique Paloise",
@@ -78,6 +79,10 @@ export default function ApprochePedagogique() {
                 </ul>
               </article>
             </div>
+            <span 
+            className="badge badge-cyan mb-4">
+            <Link href="/ecole" className="ml-2 text-cyan hover:underline">Retour Notre École</Link>
+            </span>
           </div>
         </section>
       </main>

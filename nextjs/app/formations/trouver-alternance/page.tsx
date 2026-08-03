@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Trouver son alternance — Fabrique Numérique Paloise",
@@ -87,6 +88,10 @@ export default function TrouverAlternance() {
                 </a>
               </article>
             </div>
+            <span 
+            className="badge badge-cyan mb-4">
+            <Link href="/formations" className="ml-2 text-cyan hover:underline">Retour Nos Formations</Link>
+            </span>
           </div>
         </section>
       </main>

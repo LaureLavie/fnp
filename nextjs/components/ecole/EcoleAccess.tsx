@@ -53,7 +53,7 @@ export default function EcoleAccess() {
   return (
     <section className="section">
       <div className="container">
-        <h2 className="mb-6">Venir &amp; Vivre à la FNP</h2>
+        <h2 className="mb-6">Venir &amp; à la FNP</h2>
 
         <ul className="flex flex-col gap-5 list-none p-0 mb-8">
           {infos.map((info) => (
