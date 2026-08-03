@@ -1,10 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { formations, levelFilters, type FormationLevelTag } from "./data";
-import FormationCard from "./FormationCard";
+import { levelFilters, type FormationLevelTag } from "./data";
+import FormationCard, { type Formation } from "./FormationCard";
 
-export default function FormationsExplorer() {
+export default function FormationsExplorer({
+  formations,
+}: {
+  formations: Formation[];
+}) {
   const [activeFilter, setActiveFilter] = useState<FormationLevelTag | "all">("all");
   const [query, setQuery] = useState("");
 
@@ -12,22 +16,18 @@ export default function FormationsExplorer() {
     const normalizedQuery = query.trim().toLowerCase();
 
     return formations.filter((formation) => {
-      const matchesFilter =
-        activeFilter === "all" || formation.levelTags.includes(activeFilter);
-
       const matchesQuery =
         normalizedQuery === "" ||
         formation.title.toLowerCase().includes(normalizedQuery) ||
         formation.badge.toLowerCase().includes(normalizedQuery);
 
-      return matchesFilter && matchesQuery;
+      return matchesQuery;
     });
-  }, [activeFilter, query]);
+  }, [formations, query]);
 
   return (
     <section className="section mt-5 pt-0 pb-10">
       <div className="container">
-        {/* Filtres par niveau */}
         <p className="font-display font-semibold text-terracotta text-sm mb-3">
           Filtrer par niveau :
         </p>
@@ -52,7 +52,6 @@ export default function FormationsExplorer() {
           })}
         </div>
 
-        {/* Recherche */}
         <div className="relative max-w-md mb-8">
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-terracotta">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -70,7 +69,6 @@ export default function FormationsExplorer() {
           />
         </div>
 
-        {/* Grille des formations */}
         {filtered.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((formation) => (

@@ -3,23 +3,39 @@ import type { Core } from '@strapi/strapi';
 const DIGIFORMA_GRAPHQL_URL = process.env.GRAPHQL_URL_DIGIFORMA;
 const DIGIFORMA_API_TOKEN = process.env.API_TOKEN_DIGIFORMA;
 
-// Mapping explicite et contrôlé des formations à synchroniser
+// Mapping explicite et contrôlé des formations à synchroniser.
+// badge / badgeColor / level / levelTags : Digiforma n'a pas cette notion,
+// on les définit donc ici, en dur, une fois pour toutes par formation.
+// Ils sont réécrits à chaque synchro (create ET update) pour ne jamais
+// se désynchroniser d'une modification manuelle oubliée dans Strapi.
 const DIGIFORMA_MAPPING = [
   {
     siteSlug: 'developpeur-web-full-stack',
     programId: '2694169',
     sessionId: '2568270',
+    badge: 'DWFS',
+    badgeColor: 'cyan' as const,
+    level: 'Bac +2',
+    levelTags: ['bac2'],
   },
   {
     siteSlug: 'concepteur-developpeur-applications-ia',
     programId: '2694178',
     sessionId: '2613007',
+    badge: 'CDA-IA',
+    badgeColor: 'terracotta' as const,
+    level: 'Bac +3/4',
+    levelTags: ['bac3', 'bac4'],
   },
   {
     siteSlug: 'expert-en-informatique-et-systeme-d-information',
     programId: '2555063',
     sessionId: '2333521',
-  }
+    badge: 'EISI',
+    badgeColor: 'orange' as const,
+    level: 'Bac +5',
+    levelTags: ['bac5'],
+  },
 ];
 
 const SESSION_QUERY = `
@@ -95,7 +111,6 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
           continue;
         }
 
-        // C'est ici que la magie TypeScript opère : on "cast" le résultat
         const json = (await response.json()) as DigiformaGraphQLResponse;
 
         if (json.errors) {
@@ -111,18 +126,29 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
 
         const program = session.program;
 
-        // Requête via la syntaxe du Query Engine Strapi v4/v5
         const existing = await strapi.db.query('api::formation.formation').findOne({
           where: { slug: mapping.siteSlug },
         });
 
+        // Statut d'inscription dérivé du champ "onSale" de Digiforma :
+        // si la session n'est plus en vente, on le reflète sur le site
+        // au lieu de laisser un statut "Inscriptions ouvertes" périmé.
+        const status = program.onSale === false ? 'Complet' : 'Inscriptions ouvertes';
+        const statusColor: 'cyan' | 'orange' = program.onSale === false ? 'orange' : 'cyan';
+
         const syncedData = {
           digiformaId: program.id,
           title: program.name,
-          // Fallback au cas où l'API renvoie null sur ces champs
           description: program.description || 'Description en cours de mise à jour.',
           startDateLabel: formatStartDateLabel(session.startDate),
           link: program.publicRegistrationUrl || '#',
+          // Champs codés en dur côté mapping, désormais synchronisés à chaque passage :
+          badge: mapping.badge,
+          badgeColor: mapping.badgeColor,
+          level: mapping.level,
+          levelTags: mapping.levelTags,
+          status,
+          statusColor,
           lastSyncedAt: new Date(),
         };
 
@@ -137,11 +163,6 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
             data: {
               ...syncedData,
               slug: mapping.siteSlug,
-              badge: 'Nouveau',
-              badgeColor: 'cyan',
-              level: 'Niveau à définir',
-              status: 'Inscriptions ouvertes',
-              statusColor: 'cyan',
               publishedAt: new Date(), // Auto-publish
             },
           });
