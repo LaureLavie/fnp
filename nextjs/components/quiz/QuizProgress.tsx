@@ -1,4 +1,4 @@
-import type { ProfilFormation } from "./quiz-data";
+import type { ProfilFormation } from "@/lib/quiz-data";
 
 export type ResultContent = {
   badge: string;
@@ -61,7 +61,7 @@ export type Tie2Content = ResultContent & {
   secondaryCtaHref: string;
 };
 
-function formationName(profil: ProfilFormation): string {
+function formationName(profil: ProfilFormation){
   switch (profil) {
     case "DWFS":
       return "le Développement Web";
