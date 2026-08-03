@@ -478,6 +478,211 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
+  collectionName: 'articles';
+  info: {
+    description: 'Articles du blog : actualit\u00E9s, guides pratiques, ressources p\u00E9dagogiques';
+    displayName: 'Article';
+    pluralName: 'articles';
+    singularName: 'article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aLaUne: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    auteur: Schema.Attribute.String;
+    categorie: Schema.Attribute.Enumeration<
+      ['Actualit\u00E9s', 'Formation', 'Guide', 'Ressource', 'Job Dating']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Actualit\u00E9s'>;
+    chapo: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 220;
+      }>;
+    contenu: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    datePublication: Schema.Attribute.Date & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::article.article'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'titre'> & Schema.Attribute.Required;
+    tempsLecture: Schema.Attribute.String & Schema.Attribute.DefaultTo<'5 min'>;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEvenementEvenement extends Struct.CollectionTypeSchema {
+  collectionName: 'evenements';
+  info: {
+    description: '\u00C9v\u00E9nements et rendez-vous : job dating, portes ouvertes, webinaires, salons';
+    displayName: '\u00C9v\u00E9nement';
+    pluralName: 'evenements';
+    singularName: 'evenement';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dateEvenement: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    lienExterne: Schema.Attribute.String;
+    lieu: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::evenement.evenement'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'titre'>;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    typeEvenement: Schema.Attribute.Enumeration<
+      ['Job Dating', 'Portes ouvertes', 'Webinaire', 'Salon', 'Autre']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Autre'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFormationFormation extends Struct.CollectionTypeSchema {
+  collectionName: 'formations';
+  info: {
+    description: 'Formations certifi\u00E9es, synchronis\u00E9es automatiquement depuis Digiforma';
+    displayName: 'Formation';
+    pluralName: 'formations';
+    singularName: 'formation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    badge: Schema.Attribute.String & Schema.Attribute.Required;
+    badgeColor: Schema.Attribute.Enumeration<['cyan', 'terracotta', 'orange']> &
+      Schema.Attribute.DefaultTo<'cyan'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    digiformaId: Schema.Attribute.String & Schema.Attribute.Unique;
+    image: Schema.Attribute.Media<'images'>;
+    imageAlt: Schema.Attribute.String;
+    lastSyncedAt: Schema.Attribute.DateTime;
+    level: Schema.Attribute.String & Schema.Attribute.Required;
+    levelTags: Schema.Attribute.JSON;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::formation.formation'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    startDateLabel: Schema.Attribute.String;
+    status: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'\u00C0 venir'>;
+    statusColor: Schema.Attribute.Enumeration<['cyan', 'orange']> &
+      Schema.Attribute.DefaultTo<'cyan'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiReponseQuizReponseQuiz extends Struct.CollectionTypeSchema {
+  collectionName: 'reponses_quiz';
+  info: {
+    description: 'Trace des r\u00E9ponses au quiz /test-orientation, avec ou sans email associ\u00E9';
+    displayName: "R\u00E9ponse Quiz d'Orientation";
+    pluralName: 'reponses-quiz';
+    singularName: 'reponse-quiz';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    consentementContact: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::reponse-quiz.reponse-quiz'
+    > &
+      Schema.Attribute.Private;
+    profilResultat: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    reponses: Schema.Attribute.JSON & Schema.Attribute.Required;
+    scores: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTemoignageTemoignage extends Struct.CollectionTypeSchema {
+  collectionName: 'temoignages';
+  info: {
+    description: "T\u00E9moignages d'alumni, d'entreprises partenaires et de prescripteurs";
+    displayName: 'T\u00E9moignage';
+    pluralName: 'temoignages';
+    singularName: 'temoignage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    citation: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::temoignage.temoignage'
+    > &
+      Schema.Attribute.Private;
+    nom: Schema.Attribute.String & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String & Schema.Attribute.Required;
+    typeTemoin: Schema.Attribute.Enumeration<
+      ['Alumni', 'Partenaire', 'Entreprise']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Alumni'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -990,6 +1195,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::article.article': ApiArticleArticle;
+      'api::evenement.evenement': ApiEvenementEvenement;
+      'api::formation.formation': ApiFormationFormation;
+      'api::reponse-quiz.reponse-quiz': ApiReponseQuizReponseQuiz;
+      'api::temoignage.temoignage': ApiTemoignageTemoignage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

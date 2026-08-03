@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reponses_quiz",
+  "info": {
+    "singularName": "reponse-quiz",
+    "pluralName": "reponses-quiz",
+    "displayName": "Réponse Quiz d'Orientation",
+    "description": "Trace des réponses au quiz /test-orientation, avec ou sans email associé"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": false
+    },
+    "consentementContact": {
+      "type": "boolean",
+      "default": false
+    },
+    "reponses": {
+      "type": "json",
+      "required": true
+    },
+    "scores": {
+      "type": "json"
+    },
+    "profilResultat": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
