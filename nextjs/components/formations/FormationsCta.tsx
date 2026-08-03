@@ -10,14 +10,14 @@ export default function FormationsCta() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-            <a href="/contact/contacter" className="btn bg-orange text-ink-900 hover:brightness-95">
+            <a href="/contact/candidater" className="btn bg-orange text-ink-900 hover:brightness-95">
               Je m&apos;inscris !
             </a>
             <a
-              href="/contact"
+              href="/test-orientation"
               className="btn border border-orange text-white hover:bg-white/10"
             >
-              Nous contacter
+              Faire le Quizz
             </a>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function Hero() {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
-          <a href="/candidater" className="btn btn-outline-ink">
+          <a href="/contact/candidater" className="btn btn-outline-ink">
             Candidater
           </a>
         </div>
