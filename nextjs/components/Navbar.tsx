@@ -66,7 +66,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="/contact/contacter" className="btn btn-accent py-2 px-5 text-sm">
+          <a href="/contact/candidater" className="btn btn-accent py-2 px-5 text-sm">
             Candidater
           </a>
         </div>
@@ -95,7 +95,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="/contact/contacter"
+            href="/contact/candidater"
             onClick={() => setOpen(false)}
             className="btn btn-accent mt-3 justify-center"
           >

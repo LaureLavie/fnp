@@ -23,7 +23,7 @@ export default function CandidatForm() {
   }
 
   return (
-    <section className="section pt-0">
+    <section className="section mt-3">
       <div className="container max-w-2xl">
         <div className="card">
           <h2 className="mb-2">
