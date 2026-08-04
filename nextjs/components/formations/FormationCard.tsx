@@ -53,7 +53,7 @@ export default function FormationCard({ formation }: { formation: Formation }) {
         </div>
 
         <h3 className="mb-2">{formation.title}</h3>
-        <p className="text-ink-700">{formation.description}</p>
+        <p className="text-ink-700 line-clamp[10]">{formation.description}</p>
 
         <hr className="my-4" />
 

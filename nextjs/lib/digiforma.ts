@@ -31,6 +31,10 @@ export interface Formation {
 }
 
 
+// "link" = lien de secours vers la fiche formation sur le catalogue public.
+// Utilisé si Digiforma ne renvoie pas de publicRegistrationUrl (valeur vide
+// ou absente) : on préfère toujours afficher un lien fonctionnel plutôt
+// qu'un "#" qui ne mène nulle part.
 const DIGIFORMA_MAPPING = [
   {
     siteSlug: "developpeur-web-full-stack",
@@ -39,6 +43,7 @@ const DIGIFORMA_MAPPING = [
     badgeColor: "cyan",
     level: "Bac +2",
     levelTags: ["bac2"],
+    link: "https://fabriquenumerique.catalogueformpro.com/2/formation-continue/2516293/2026-developpeur-web",
   },
   {
     siteSlug: "concepteur-developpeur-applications-ia",
@@ -47,6 +52,7 @@ const DIGIFORMA_MAPPING = [
     badgeColor: "terracotta",
     level: "Bac +3/4",
     levelTags: ["bac3", "bac4"],
+    link: "https://fabriquenumerique.catalogueformpro.com/7/formation-alternance/1771778/2026-concepteur-developpeur-dapplications-specialise-intelligence-artificielle",
   },
   {
     siteSlug: "expert-en-informatique-et-systeme-d-information",
@@ -55,6 +61,7 @@ const DIGIFORMA_MAPPING = [
     badgeColor: "orange",
     level: "Bac +5",
     levelTags: ["bac5"],
+    link: "https://fabriquenumerique.catalogueformpro.com/7/formation-alternance/1627520/2025-expert-en-informatique-et-systeme-dinformation",
   },
 ] as const;
 
@@ -170,9 +177,11 @@ export async function getFormations(): Promise<Formation[]> {
             formatStartDateLabel(
               session.startDate
             ),
+          // Priorité au lien renvoyé par Digiforma ; sinon, on retombe
+          // sur le lien catalogue défini dans le mapping ci-dessus.
           link:
-            program.publicRegistrationUrl ??
-            "#",
+            program.publicRegistrationUrl ||
+            mapping.link,
           badge: mapping.badge,
           badgeColor: mapping.badgeColor,
           level: mapping.level,
