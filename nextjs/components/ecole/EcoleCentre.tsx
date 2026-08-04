@@ -39,7 +39,7 @@ export default function EcoleCentre() {
     </div>
 
     {/* Bloc Image */}
-    <div className="relative w-[500px] md:aspect-auto md:h-full">
+    <div className="relative w-full aspect-ratio[4/3] md:aspect-auto md:h-full">
       <img
         src="/image/lahererre.webp"
         alt="Centre de Formations au Pôle Laherrère"
@@ -53,7 +53,7 @@ export default function EcoleCentre() {
         <div className="bg-surface-light p-6 rounded-lg border border-ink-100 my-6">
           <h3 className="font-display font-bold text-ink-900 mb-3">Confort et technicité</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-10">
-    <div className="relative w-[500px] md:aspect-auto md:h-full">
+    <div className="relative w-full aspect-ratio[4/3] md:aspect-auto md:h-full">
       <img
         src="/image/salles.webp"
         alt="salle de cours au Pôle Laherrère"
