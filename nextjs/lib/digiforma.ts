@@ -191,7 +191,7 @@ export async function getFormations(): Promise<Formation[]> {
           status:
             program.onSale
               ? "Inscriptions ouvertes"
-              : "Formation démarrée",
+              : "À venir",
           statusColor:
             program.onSale
               ? "cyan"
