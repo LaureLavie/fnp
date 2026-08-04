@@ -30,6 +30,13 @@ services:
     environment:
       NODE_ENV: production
       NEXT_PUBLIC_STRAPI_URL: http://213.32.21.79:1337
+      # Ajoutés : la page /formations appelle Digiforma directement,
+      # sans passer par Strapi -> ces variables doivent aussi être ici.
+      GRAPHQL_URL_DIGIFORMA: ${GRAPHQL_URL_DIGIFORMA}
+      API_TOKEN_DIGIFORMA: ${API_TOKEN_DIGIFORMA}
+      # Ajouté : nécessaire pour que la route API du quiz d'orientation
+      # puisse écrire dans Strapi (reponse-quiz).
+      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN}
     networks:
       - fnp_internal
     ports:

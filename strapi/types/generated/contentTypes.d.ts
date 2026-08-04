@@ -564,54 +564,6 @@ export interface ApiEvenementEvenement extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiFormationFormation extends Struct.CollectionTypeSchema {
-  collectionName: 'formations';
-  info: {
-    description: 'Formations certifi\u00E9es, synchronis\u00E9es automatiquement depuis Digiforma';
-    displayName: 'Formation';
-    pluralName: 'formations';
-    singularName: 'formation';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    badge: Schema.Attribute.String & Schema.Attribute.Required;
-    badgeColor: Schema.Attribute.Enumeration<['cyan', 'terracotta', 'orange']> &
-      Schema.Attribute.DefaultTo<'cyan'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
-    digiformaId: Schema.Attribute.String & Schema.Attribute.Unique;
-    image: Schema.Attribute.Media<'images'>;
-    imageAlt: Schema.Attribute.String;
-    lastSyncedAt: Schema.Attribute.DateTime;
-    level: Schema.Attribute.String & Schema.Attribute.Required;
-    levelTags: Schema.Attribute.JSON;
-    link: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::formation.formation'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    startDateLabel: Schema.Attribute.String;
-    status: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'\u00C0 venir'>;
-    statusColor: Schema.Attribute.Enumeration<['cyan', 'orange']> &
-      Schema.Attribute.DefaultTo<'cyan'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiReponseQuizReponseQuiz extends Struct.CollectionTypeSchema {
   collectionName: 'reponses_quiz';
   info: {
@@ -1197,7 +1149,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
       'api::evenement.evenement': ApiEvenementEvenement;
-      'api::formation.formation': ApiFormationFormation;
       'api::reponse-quiz.reponse-quiz': ApiReponseQuizReponseQuiz;
       'api::temoignage.temoignage': ApiTemoignageTemoignage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
