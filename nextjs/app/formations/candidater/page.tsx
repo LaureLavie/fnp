@@ -49,7 +49,7 @@ export default function Candidater() {
                 <ul className="list-disc pl-5 flex flex-col gap-1 text-ink-700 mb-0">
                   <li>Rendez-vous sur notre catalogue de formation.</li>
                   <li>Choisissez la formation qui vous convient.</li>
-                  <li>Cliquez sur la rubrique <strong>"se préinscrire"</strong>.</li>
+                  <li>Cliquez sur la rubrique <Link href="/contact/candidater">"se préinscrire"</Link></li>
                   <li>Indiquez simplement votre nom, prénom, email et téléphone, puis envoyez votre demande.</li>
                 </ul>
               </article>
