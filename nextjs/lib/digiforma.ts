@@ -171,7 +171,7 @@ export async function getFormations(): Promise<Formation[]> {
           id: session.id,
           title: program.name,
           description:
-            program.description ??
+            program.description.slice(0, 300) + '…' ||
             "Description en cours de mise à jour.",
           startDateLabel:
             formatStartDateLabel(
@@ -191,7 +191,7 @@ export async function getFormations(): Promise<Formation[]> {
           status:
             program.onSale
               ? "Inscriptions ouvertes"
-              : "Complet",
+              : "Formation démarrée",
           statusColor:
             program.onSale
               ? "cyan"
